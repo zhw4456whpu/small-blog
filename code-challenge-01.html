@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Code Challenge #1</title>
+	<style>
+		/* Add CSS */
+		body,html{margin:0px;padding:0px;font-family:'Arial','Microsoft Yahei';max-width:1200px !important;}
+		body{background-color:#f2f2f2;}
+		*{box-sizing:border-box;-moz-box-sizing:border-box; -webkit-box-sizing:border-box;}
+		input[type="text"]{width:100%;height:30px;border:1px solid #E8E8E8;border-radius:3px;}
+		textarea{width:100%;height:80px;border:1px solid #E8E8E8;border-radius:3px;}
+		span{word-wrap: break-word;}
+		.clear{clear:both;content:'';}
+		
+		#content{width:634px;margin:0px auto;}
+		.left{width:80%;height:100%;min-height:1px;float:left;}
+		.article{margin:40px 40px 20px 40px;border:1px solid #dadada;background-color:white;}
+		.article div{margin:15px;}
+		.edit{position:relative;display:none;}
+		.edit .editBtn{position:absolute;z-index:2;top:0px;right:0px;width:65px;height:35px;line-height:35px;text-align:center;background-color:rgba(0,0,0,0.5);color:white;border-radius:3px;margin:0px;}
+		.article:hover .edit,.edit:hover{display:block;}
+		.imgSource{width:100%;height:100%;position:relative;display: inline-block;margin:0px;}
+		.imgSource img{width:100%;height:100%;max-width:100%;max-height:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px;}
+		.aTitle{font-size:16px;font-weight:bold;}
+		.aContent{color:#676767;font-size:12px;}
+		
+		.right{width:20%;height:auto;float:left;}
+		.addBtn{width:112px;height:30px;background-color:#5fb485;border:none;border-radius:3px;color:white;font-weight:bold;margin-top:40px;}
+		
+		.cover{width:100%;height:100%;background: rgba(0,0,0,0.4);position:fixed;z-index:100;top:0px;left:0px;bottom:0px;}
+		.dialog{width:380px;height:370px;border-radius:3px;margin:200px auto;background-color:white;}
+		.dialogTitle{height: 60px;line-height: 60px;margin: 0px 20px;color: black;font-size: 16px;font-weight: bold;}
+		.dialogImg,.dialogArtiTitle,.dialogArtiContent{height: 70px;margin: 0px 20px;color: black;font-size: 14px;font-weight: normal;}
+		.dialogArtiContent{height:auto;}
+		.imgTitle,.arctTitle,.artiContent{margin-bottom:10px;}
+		.btns{float:right;margin:15px 15px auto auto;}
+		#saveBtn{width:80px;height:30px;background-color:#5fb485;border:none;border-radius:3px;color:white;font-size:16px;font-weight:bold;}
+		#cancBtn{width:80px;height:30px;border:none;background-color:white;color:#969696;font-size:16px;font-weight:bold;}
+	</style>
+</head>
+<body id="body">
+	<!--
+		Code Challenge #1:
+
+		Using HTML, CSS, and JavaScript, please recreate the small blog application seen in the image below.
+		If needed, feel free to use Google for help. Please give your best effort without looking at other code
+		examples. The primary goal of this challenge is to get an understanding of your level of comfort with
+		CSS and JS. We don't expect it to be perfect but, please be prepared to explain your solution.
+
+		Blog App: http://i.imgur.com/xbSRpUk.png (blog-app-homepage.png)
+		
+		-The app should be fully responsive up to a maximum width of 1200 pixels.
+		-The articles images should always maintain the proper aspect ratio of 16 x 9 even though the original
+		 (source) image might not have the correct aspect radio.
+		-Use any tools or libraries you feel comfortable with.		
+		
+		
+		Adding a New Article: 
+		
+		On Add New: http://i.imgur.com/kQ2UjiL.png (blog-app-add-new.png)
+		
+		When a user clicks on the "Add New" button, a modal window should appear giving the user an option to add
+		a new orticle to the list. In this modal window, the user can enter an image source, an article title, and
+		article content.
+		
+		After a user clicks the "Save" button, the modal should disappear, and the new article should be added to
+		the top of the list of articles.
+		
+		
+		Editing an Existing Article:
+		
+		On Hover: http://i.imgur.com/6DYUD4Y.png (blog-app-on-hover.png)
+		
+		On Edit: http://i.imgur.com/DkDOT7S.png (blog-app-on-edit.png)
+		
+		When a user hovers over an article, an "Edit" button should appear. This button should be hidden by defualt.
+		When the user clicks on the "Edit" button, a modal should appear giving the user options to edit the image,
+		the article title, and the article content. 
+		
+		After a user clicks the "Save" button, the modal window should disappear and the updated content should be
+		applied to the correct article.
+	-->
+	<div id="content">
+		<div class="left" id="left">
+			<!--<div class="article clear">
+				<div class="edit" id="edit">
+					<div class="editBtn" id="editBtn">Edit</div>
+				</div>
+				<div class="imgLayout" id="imgLayout">
+					<div class="imgSource" style="margin:0px;">
+						<div style="margin:0px;margin-top:75%;"></div>
+						<img id="aImg" data-src="a1.jpg" src="a1.jpg"/>
+					</div>
+				</div>
+				<div class="articleTitle">
+					<span class="aTitle" data-title="Article title goes here to introduce the content">Article title goes here to introduce the content</span>
+				</div>
+				<div class="articleContent">
+					<span class="aContent" data-content="Fusce venenatis orci metus,sed vulputate tellus ornare ut.">Fusce venenatis orci metus,sed vulputate tellus ornare ut.Fusce venenatis orci metus,sed vulputate tellus ornare ut.Fusce venenatis orci metus,sed vulputate tellus ornare ut.Fusce venenatis orci metus,sed vulputate tellus ornare ut.Fusce venenatis orci metus,sed vulputate tellus ornare ut.</span>
+				</div>
+				<div class="clear"></div>
+			</div>
+			-->
+		</div>
+		<div class="right">
+			<input type="button" id="addBtn" class="addBtn" value="+ Add New"/>
+		</div>
+	</div>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script>
+		var App = {
+			init: function(){
+				var t = this;
+				var e = window.event || e;
+				t.bindEvent(e);
+			},
+			opts : {index:0,status:'add'},
+			viewModel : {
+				substitute: function(str,o,regexp){
+				  return  str.replace(regexp || /\\?\{([^{}]+)\}/g, function (match, name) {
+					return (o[name] === undefined) ? '' : o[name];
+				  });
+				},
+				articleTpl: ['<div class="edit" id="edit">',
+							'<div class="editBtn" id="editBtn" data-index="{eindex}">Edit</div>',
+							'</div>',
+							'<div class="imgLayout" id="imgLayout">',
+								'<div class="imgSource" style="margin:0px;">',
+									'<div style="margin:0px;margin-top:75%;"></div>',
+									'<img src="{imgSource}" data-src="{imgSource}" />',
+								'</div>',
+							'</div>',
+							'<div class="articleTitle">',
+								'<span class="aTitle" data-title="{aTitle}">{aTitle}</span>',
+							'</div>',
+							'<div class="articleContent">',
+							'<span class="aContent" data-content="{artiContent}">{artiContent}</span>',
+							'</div>'].join(''),
+				
+				setTpl: function(data){},
+				getTpl: function(){
+					return this.articleTpl;
+				},
+				getCover: function(){
+					var cover = document.createElement('div');
+					cover.setAttribute('id','cover');
+					cover.setAttribute('class','cover');
+					return cover;
+				},
+				showDialog: function(data){
+					
+					var dialog = ['<div class="dialog" data-index="{eindex}">',
+						'<div class="dialogTitle"><span class="dTitle">{dType} Article</span></div>',
+						'<div class="dialogImg"><div class="imgTitle">Image</div>',
+							'<input type="text" name="imgSrc" id="imgSrc" data-src="{imgSource}" value="{imgSource}" />',
+						'</div>',
+						'<div class="dialogArtiTitle"><div class="arctTitle">Title</div>',
+							'<input type="text" name="aTitle" id="aTitle" data-title="{aTitle}" value="{aTitle}" />',
+						'</div>',
+						'<div class="dialogArtiContent"><div class="artiContent">Content</div>',
+							'<textarea name="artiContent" id="artiContent" data-content="{artiContent}">{artiContent}</textarea>',
+						'</div>',
+						'<div class="btns">',
+							'<input type="button" id="saveBtn" value="save" />',
+							'<input type="button" id="cancBtn" value="Cancel" />',
+						'</div>',
+					'</div>'
+					].join('');
+					var dialogNode = this.getCover();
+					dialogNode.innerHTML = this.substitute(dialog,data);
+					document.getElementById('body').appendChild(dialogNode);
+				},
+				closeDialog: function(){
+					var cover = document.getElementById('cover');
+					if(typeof cover != undefined && cover!= null)
+					document.getElementById('body').removeChild(cover);
+				},
+				refreshDom: function(data){
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children().find('.imgSource').children('img').remove();
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children().find('.imgSource').append($('<img src="" data-src="">'))
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children().find('.imgSource').children('img').attr('data-src',data.imgSource);
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children().find('.imgSource').children('img').attr('src',data.imgSource);
+					
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children().find('.aTitle').remove();
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children('.articleTitle').append($('<span class="aTitle" data-title="">'));
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children().find('.aTitle').attr('data-title',data.aTitle);
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children().find('.aTitle').text(data.aTitle);
+					
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children().find('.aContent').remove();
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children('.articleContent').append($('<span class="aContent" data-title="">'));
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children().find('.aContent').attr('data-content',data.artiContent);
+					$('.editBtn[data-index=' + data.eindex+ ']').parents('.article').children().find('.aContent').text(data.artiContent);
+				}
+			},
+			dataModel : {
+				getArtiData: function(targetId,index){
+					var data = {};
+					data.dType = 'Edit';
+					data.eindex = index;
+					data.imgSource = $('.editBtn[data-index='+index+']').parents('.article').children().find('.imgSource').children('img').data('src');
+					data.aTitle = $('.editBtn[data-index='+index+']').parents('.article').children().find('.aTitle').data('title');
+					data.artiContent = $('.editBtn[data-index='+index+']').parents('.article').children().find('.aContent').data('content');
+					return data;
+				},
+				getDialogData: function(){
+					var data = {};
+					data.eindex = $('.dialog').data('index');
+					data.imgSource = $('#imgSrc').val();
+					data.aTitle = $('#aTitle').val();
+					data.artiContent = $('#artiContent').val();
+					return data;
+				}
+			},
+			bindEvent: function(e){
+				var t = this;
+				addArticle = function(data){
+					t.opts.status = 'add';
+					t.viewModel.showDialog(data);
+				};
+				editArticle =  function(data){
+					t.opts.status = 'edit';
+					t.viewModel.showDialog(data);
+				};
+				saveArticle =  function(data){
+					if(t.opts.status == 'add'){
+						var tpl = t.viewModel.getTpl();
+						tpl = t.viewModel.substitute(tpl,data);
+						var article = document.createElement('div');
+						article.setAttribute('class','article clear');
+						article.innerHTML = tpl;
+						document.getElementById('left').appendChild(article);
+						
+					}else{
+						this.updateEditData(data);
+					}
+					t.viewModel.closeDialog();
+				};
+				updateEditData = function(data){
+					t.viewModel.refreshDom(data);
+				};
+				handle = function(e){
+					var data = {};
+					var targetId = e.target.id || '';
+					switch(targetId){
+					case 'addBtn':
+						data.dType = 'Add';
+						data.eindex = t.opts.index;
+						data.imgSource = '';
+						data.aTitle = '';
+						data.artiContent = '';
+						addArticle(data);
+					break;
+					case 'editBtn':
+						data = t.dataModel.getArtiData(targetId,e.target.dataset.index);
+						editArticle(data);
+					break;
+					case 'saveBtn':
+						data = t.dataModel.getDialogData();
+						saveArticle(data);
+						t.opts.index++;
+					break;
+					case 'cancBtn':
+						t.viewModel.closeDialog();
+						t.opts.index++;
+					break;
+					default:
+						//t.viewModel.closeDialog();
+					break;
+					}
+				};
+				var obj = document.getElementById('body');
+				
+				try{  // Chrome、FireFox、Opera、Safari、IE9.0及其以上版本
+					obj.addEventListener('click',handle,false);
+				}catch(e){
+					try{  // IE8.0及其以下版本
+						obj.attachEvent('onclick',handle);
+					}catch(e){  // 早期浏览器
+						obj['onclick'] = handle;
+					}
+				}
+			},
+			
+		};
+		
+		App.init();
+		/* Add JavaScript */
+	</script>
+</body>
+</html>
